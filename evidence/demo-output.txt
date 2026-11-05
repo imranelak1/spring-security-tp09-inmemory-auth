@@ -1,0 +1,29 @@
+DÉMONSTRATION RÉELLE : spring-security-demo sur http://localhost:8080
+Authentification en mémoire (user/1111, admin/1234) + BCrypt
+------------------------------------------------------------
+[1] Accès public à la page d'accueil
+GET /                          -> HTTP 200
+------------------------------------------------------------
+[2] Accès à un espace protégé SANS authentification (doit rediriger vers /login)
+GET /user/dashboard            -> HTTP 302   (Location: http://localhost:8080/login)
+GET /admin/dashboard           -> HTTP 302
+------------------------------------------------------------
+[3] Page de connexion personnalisée
+GET /login                     -> HTTP 200
+------------------------------------------------------------
+[4] Connexion avec le compte USER (user/1111)
+GET /user/dashboard  [USER]    -> HTTP 200   (autorisé)
+GET /admin/dashboard [USER]    -> HTTP 403   (refusé : 403)
+------------------------------------------------------------
+[5] Connexion avec un MAUVAIS mot de passe (user/mauvais)
+POST /login (mauvais mot de passe) -> redirection (Location: http://localhost:8080/login?error)
+------------------------------------------------------------
+[6] Connexion avec le compte ADMIN (admin/1234)
+GET /user/dashboard  [ADMIN]   -> HTTP 200   (autorisé)
+GET /admin/dashboard [ADMIN]   -> HTTP 200   (autorisé)
+------------------------------------------------------------
+[7] Déconnexion du compte ADMIN
+POST /logout                   -> redirection (Location: http://localhost:8080/)
+GET /admin/dashboard (après logout) -> HTTP 302   (de nouveau protégé)
+------------------------------------------------------------
+VÉRIFICATIONS HTTP RÉUSSIES

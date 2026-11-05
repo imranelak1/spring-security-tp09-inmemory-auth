@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès refusé (403)</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="card">
+        <span class="badge" style="background: rgba(239,68,68,0.18); color:#fca5a5;">ERREUR 403</span>
+        <h1>Accès refusé</h1>
+        <p>Vous êtes authentifié, mais votre rôle ne vous autorise pas à consulter
+           cette page. Cet espace exige un rôle supérieur (par exemple
+           <strong>ADMIN</strong>).</p>
+
+        <div class="alert alert-error">
+            Code HTTP 403 — Forbidden
+        </div>
+
+        <div class="links">
+            <a class="btn btn-primary" th:href="@{/}">Retour à l'accueil</a>
+            <form class="inline" th:action="@{/logout}" method="post">
+                <button class="btn btn-ghost" type="submit">Changer de compte</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

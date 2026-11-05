@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Spring Security</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="card">
+        <h1>Bienvenue sur l'application publique</h1>
+        <p>Cette page d'accueil est accessible à tous. Les espaces ci-dessous sont
+           protégés par Spring Security et exigent les rôles appropriés.</p>
+
+        <div sec:authorize="isAuthenticated()" class="alert alert-success">
+            Connecté en tant que <strong sec:authentication="name">user</strong>
+            (<span sec:authentication="principal.authorities">roles</span>)
+        </div>
+
+        <div class="links">
+            <a class="btn btn-primary" th:href="@{/user/dashboard}">Espace Utilisateur</a>
+            <a class="btn btn-success" th:href="@{/admin/dashboard}">Espace Administrateur</a>
+
+            <a sec:authorize="!isAuthenticated()" class="btn btn-ghost" th:href="@{/login}">Se connecter</a>
+            <form sec:authorize="isAuthenticated()" class="inline" th:action="@{/logout}" method="post">
+                <button class="btn btn-danger" type="submit">Se déconnecter</button>
+            </form>
+        </div>
+
+        <div class="meta">
+            Comptes de test : <code>user / 1111</code> (USER) &nbsp;·&nbsp;
+            <code>admin / 1234</code> (ADMIN + USER)
+        </div>
+    </div>
+</body>
+</html>

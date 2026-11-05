@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Application Sécurisée</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="card login-container">
+        <h2>Veuillez vous identifier</h2>
+        <p>Accès réservé. Authentifiez-vous pour atteindre les espaces protégés.</p>
+
+        <div th:if="${param.error}" class="alert alert-error">
+            Identifiant ou mot de passe invalide.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            Vous avez été déconnecté avec succès.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required autofocus />
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required />
+
+            <div class="links">
+                <button class="btn btn-primary" type="submit">Se connecter</button>
+                <a class="btn btn-ghost" th:href="@{/}">Retour à l'accueil</a>
+            </div>
+        </form>
+
+        <div class="meta">
+            Comptes de test : <code>user / 1111</code> &nbsp;·&nbsp; <code>admin / 1234</code>
+        </div>
+    </div>
+</body>
+</html>

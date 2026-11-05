@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Administrateur</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="card">
+        <span class="badge badge-admin">ESPACE ADMINISTRATEUR</span>
+        <h1>Tableau de bord Administrateur</h1>
+        <p>Cette zone est réservée aux comptes disposant du rôle <strong>ADMIN</strong>.</p>
+
+        <div class="alert alert-success">
+            Connecté en tant que <strong sec:authentication="name">admin</strong>
+        </div>
+
+        <div class="links">
+            <a class="btn btn-primary" th:href="@{/user/dashboard}">Voir l'espace Utilisateur</a>
+            <a class="btn btn-ghost" th:href="@{/}">Retour à l'accueil</a>
+            <form class="inline" th:action="@{/logout}" method="post">
+                <button class="btn btn-danger" type="submit">Se déconnecter</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
